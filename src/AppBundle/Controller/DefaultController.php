@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -28,5 +29,17 @@ class DefaultController extends Controller
         return $this->render('product/index.html.twig', array(
             'products' => $products,
         ));
+    }
+
+    /**
+     * @Route("/product_search")
+     * @Method("GET")
+     */
+    public function searchProductAction(Request $request)
+    {
+        $q = $request->query->get('term');
+        $results = $this->getDoctrine()->getRepository('AppBundle:Product')->findLikeName($q);
+
+        return $this->render('default/product_search.html.twig', ['results' => $results]);
     }
 }
