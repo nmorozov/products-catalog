@@ -23,7 +23,7 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="text", length=100)
+     * @ORM\Column(type="text", length=150)
      */
     private $shortDescription;
 
