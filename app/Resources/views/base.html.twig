@@ -2,12 +2,19 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Products list{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('styles.css') }}" />
+        <link rel="stylesheet"
+              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <div id="wrapper">
+        <div id="container">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
