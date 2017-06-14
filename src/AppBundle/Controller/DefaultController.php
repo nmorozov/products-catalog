@@ -2,20 +2,31 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Color;
+use AppBundle\Entity\Product;
+use AppBundle\Entity\QuantityUnit;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
+     * Lists all product entities.
+     *
      * @Route("/", name="homepage")
+     * @Method("GET")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $em = $this->getDoctrine()->getManager();
+
+        $products = $em->getRepository('AppBundle:Product')->findAll();
+
+        return $this->render('product/index.html.twig', array(
+            'products' => $products,
+        ));
     }
 }
